@@ -102,12 +102,13 @@ const News =(props)=> {
     setloding(0)
     setdisable(true)
     setinfo("Loading please wait")
-    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
-    let data = await api.json();
+    await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`)
+    .then((api)=>{ return api.json()}) 
+    .then((data)=>{setArticles(data.articles);settotal(data.totalResults)})
     props.click(100)
     // await this.setState({ articles: data.articles, total: data.totalResults, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
-    setArticles(data.articles)
-    settotal(data.totalResults)
+    // setArticles(data.articles)
+    // settotal(data.totalResults)
     setloding(1)
     setdisable(false)
     setinfo("WELCOME TO MY FIRST NEWS WEB")
