@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const News =(props)=> {
   
       const [Articles,setArticles]=useState(["",""])
-      const [Image,setImage]=useState("")
+      // const [Image,setImage]=useState("")
       const [page,setpage]=useState(1)
       const [loding,setloding]=useState(0)
       const [disable,setdisable]=useState(false)
@@ -23,12 +23,12 @@ const News =(props)=> {
   // }
   // document.Tit(title)
   document.title=(Title)
-  const check = () => {
-    if (page==1) {
-      return true
-    }
-    return false
-  }
+  // const check = () => {
+  //   if (page==1) {
+  //     return true
+  //   }
+  //   return false
+  // }
   // const prev = async () => {
 
   //   // this.setState({ loding: 0, info: "Loading please wait" })
@@ -69,10 +69,12 @@ const News =(props)=> {
     // await this.setState({ page: this.state.page + 1 })
     setpage(page+1)
 
-    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
-    let data = await api.json();
-    // this.setState({articles:this.state.articles.concat(data.articles)})
-    setArticles(Articles.concat(data.articles))
+    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`)
+    .then((api)=>{return api.json()})
+    .then((data)=>{setArticles(Articles.concat(data.articles))})
+    // let data = await api.json();
+    // // this.setState({articles:this.state.articles.concat(data.articles)})
+    // setArticles(Articles.concat(data.articles))
 
   }
   // const checknext = () => {
