@@ -69,7 +69,7 @@ const News =(props)=> {
     // await this.setState({ page: this.state.page + 1 })
     setpage(page+1)
 
-    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`)
+    await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`)
     .then((api)=>{return api.json()})
     .then((data)=>{setArticles(Articles.concat(data.articles))})
     // let data = await api.json();
@@ -134,15 +134,15 @@ const News =(props)=> {
         <div >
           <InfiniteScroll 
           
-            dataLength={Articles.length}
-            next={fetchMoreData}
+          next={fetchMoreData}
+          dataLength={Articles && Articles.length}
             
             hasMore={!((5 * page) > total)}
             loader={<h4><Load /></h4>}
             scrollableTarget="scrollableDiv"
           >
             <div className="ALLNEWS row container m-auto d-flex  justify-content-center">
-              {Articles.map((element) => {
+              {Articles && Articles.map((element) => {
                 if (!disable) {
                   return (<Card key={st++} title={element.title} image={element.urlToImage} description={element.description} url={element.url} />)
                 } return 8
