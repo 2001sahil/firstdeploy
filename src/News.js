@@ -1,6 +1,5 @@
 import React, { useEffect,useState} from 'react'
 import Card from './components/Card';
-// import Navbar from './components/Navbar';
 import Load from './components/Load';
 import InfiniteScroll from 'react-infinite-scroll-component';
 const News =(props)=> {
