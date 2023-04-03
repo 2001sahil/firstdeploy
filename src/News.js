@@ -4,7 +4,7 @@ import Load from './components/Load';
 import InfiniteScroll from 'react-infinite-scroll-component';
 const News =(props)=> {
   
-      const [articles,setarticles]=useState([])
+      const [Articles,setArticles]=useState([])
       const [Image,setImage]=useState("")
       const [page,setpage]=useState(1)
       const [loding,setloding]=useState(0)
@@ -72,7 +72,7 @@ const News =(props)=> {
     let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
     let data = await api.json();
     // this.setState({articles:this.state.articles.concat(data.articles)})
-    setarticles(articles.concat(data.articles))
+    setArticles(Articles.concat(data.articles))
 
   }
   // const checknext = () => {
@@ -106,7 +106,7 @@ const News =(props)=> {
     let data = await api.json();
     props.click(100)
     // await this.setState({ articles: data.articles, total: data.totalResults, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
-    setarticles(data.articles)
+    setArticles(data.articles)
     settotal(data.totalResults)
     setloding(1)
     setdisable(false)
@@ -131,7 +131,7 @@ const News =(props)=> {
         <div >
           <InfiniteScroll 
           
-            dataLength={articles.length}
+            dataLength={Articles.length}
             next={fetchMoreData}
             
             hasMore={!((5 * page) > total)}
@@ -139,7 +139,7 @@ const News =(props)=> {
             scrollableTarget="scrollableDiv"
           >
             <div className="ALLNEWS row container m-auto d-flex  justify-content-center">
-              {articles.map((element) => {
+              {Articles.map((element) => {
                 if (!disable) {
                   return (<Card key={st++} title={element.title} image={element.urlToImage} description={element.description} url={element.url} />)
                 } return 8
