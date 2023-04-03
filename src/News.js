@@ -29,39 +29,39 @@ const News =(props)=> {
     }
     return false
   }
-  const prev = async () => {
+  // const prev = async () => {
 
-    // this.setState({ loding: 0, info: "Loading please wait" })
-    setloding(0)
-    setinfo("Loading please wait")
-    await setpage(page-1)
-    // await this.setState({ page: this.state.page - 1 });
+  //   // this.setState({ loding: 0, info: "Loading please wait" })
+  //   setloding(0)
+  //   setinfo("Loading please wait")
+  //   await setpage(page-1)
+  //   // await this.setState({ page: this.state.page - 1 });
 
 
-    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
-    let data = await api.json();
-    // this.setState({ articles: data.articles, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
-    setarticles(data.articles)
-    setloding(1)
-    setdisable(false)
-    setinfo("WELCOME TO MY FIRST NEWS WEB")
+  //   let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
+  //   let data = await api.json();
+  //   // this.setState({ articles: data.articles, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
+  //   setarticles(data.articles)
+  //   setloding(1)
+  //   setdisable(false)
+  //   setinfo("WELCOME TO MY FIRST NEWS WEB")
     
-  }
-  const next = async () => {
-    // this.setState({ loding: 0, info: "Loading please wait" })
-    setloding(0)
-    setinfo("Loading please wait")
+  // }
+  // const next = async () => {
+  //   // this.setState({ loding: 0, info: "Loading please wait" })
+  //   setloding(0)
+  //   setinfo("Loading please wait")
 
-    // await this.setState({ page: this.state.page + 1 })
-    await setpage(page+1)
-    let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
-    let data = await api.json();
-    // this.setState({ articles: data.articles, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
-    setarticles(data.articles)
-    setloding(1)
-    setdisable(false)
-    setinfo("WELCOME TO MY FIRST NEWS WEB")
-  }
+  //   // await this.setState({ page: this.state.page + 1 })
+  //   await setpage(page+1)
+  //   let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
+  //   let data = await api.json();
+  //   // this.setState({ articles: data.articles, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
+  //   setarticles(data.articles)
+  //   setloding(1)
+  //   setdisable(false)
+  //   setinfo("WELCOME TO MY FIRST NEWS WEB")
+  // }
   const fetchMoreData=async ()=>{
     
     // this.props.Setstate=0
@@ -75,13 +75,30 @@ const News =(props)=> {
     setarticles(articles.concat(data.articles))
 
   }
-  const checknext = () => {
-    if (5 *page > total) {
-      return true
-    } return false
-  }
-  const fun=async ()=>{
-    props.click(0)
+  // const checknext = () => {
+  //   if (5 *page > total) {
+  //     return true
+  //   } return false
+  // }
+  // const fun=async ()=>{
+  //   props.click(0)
+  //   setloding(0)
+  //   setdisable(true)
+  //   setinfo("Loading please wait")
+  //   let api = await fetch(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&apiKey=3a84fc9a12d946a8955b46729d4903ce&pageSize=5&page=${page}&category=${props.category}`);
+  //   let data = await api.json();
+  //   props.click(100)
+  //   // await this.setState({ articles: data.articles, total: data.totalResults, loding: 1, disable: false, info: "WELCOME TO MY FIRST NEWS WEB" })
+  //   setarticles(data.articles)
+  //   settotal(data.totalResults)
+  //   setloding(1)
+  //   setdisable(false)
+  //   setinfo("WELCOME TO MY FIRST NEWS WEB")
+  // }
+  useEffect( () => {
+      // fun();
+    const getdata=async ()=>{
+        props.click(0)
     setloding(0)
     setdisable(true)
     setinfo("Loading please wait")
@@ -94,18 +111,18 @@ const News =(props)=> {
     setloding(1)
     setdisable(false)
     setinfo("WELCOME TO MY FIRST NEWS WEB")
-  }
-  useEffect( () => {
-      fun();
+
+      }
+      getdata();
       settitle(`React-${props.category}`)
   },[])
-  const a = () => {
-    if (loding === 0) {
-      if (disable === true) {
-        return <Load />;
-      }
-    }
-  }
+  // const a = () => {
+  //   if (loding === 0) {
+  //     if (disable === true) {
+  //       return <Load />;
+  //     }
+  //   }
+  // }
   let st=1;
   
     return (
@@ -114,7 +131,7 @@ const News =(props)=> {
         <div >
           <InfiniteScroll 
           
-            dataLength={50}
+            dataLength={articles.length}
             next={fetchMoreData}
             
             hasMore={!((5 * page) > total)}
