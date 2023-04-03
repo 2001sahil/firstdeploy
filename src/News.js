@@ -114,7 +114,7 @@ const News =(props)=> {
         <div >
           <InfiniteScroll 
           
-            dataLength={articles.length}
+            dataLength={50}
             next={fetchMoreData}
             
             hasMore={!((5 * page) > total)}
